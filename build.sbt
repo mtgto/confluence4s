@@ -12,7 +12,7 @@ scalacOptions ++= Seq("-deprecation", "-unchecked", "-encoding", "UTF8")
 
 libraryDependencies ++= Seq(
   "org.sisioh" % "scala-dddbase-core_2.9.1" % "0.0.1",
-  "org.codehaus.swizzle" % "swizzle-confluence" % "1.6.1",
+  "org.apache.xmlrpc" % "xmlrpc-dist" % "3.1.3",
   "org.specs2" %% "specs2" % "1.12.1" % "test"
 )
 

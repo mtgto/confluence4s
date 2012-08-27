@@ -1,77 +1,96 @@
 package net.mtgto.confluence4s
 
-import org.codehaus.swizzle.confluence.{Confluence, Page => InnerPage, PageSummary => InnerPageSummary, SpaceSummary => InnerSpaceSummary}
+import org.apache.xmlrpc.client.XmlRpcClient
 import scala.collection.JavaConversions._
-import java.util.{List => JList}
+import java.util.{List => JList, Map => JMap, Date, HashMap => JHashMap}
 
 class DefaultClient(
-  val innerClient: Confluence
+  val innerClient: XmlRpcClient,
+  val token: String
 ) extends Client {
   def getSpaceSummaries = {
-    innerClient.getSpaces.asInstanceOf[JList[InnerSpaceSummary]].map(
-      innerSpaceSummary =>
-        SpaceSummary(key = innerSpaceSummary.getKey,
-                     name = innerSpaceSummary.getName,
-                     url = innerSpaceSummary.getUrl)
-    ).toSeq
+    val spaces = innerClient.execute("confluence2.getSpaces", Array[AnyRef](token)).asInstanceOf[Array[AnyRef]]
+    spaces.map {
+      space => {
+        val map = space.asInstanceOf[JMap[String, AnyRef]]
+        SpaceSummary(key = map.get("key").asInstanceOf[String],
+                     name = map.get("name").asInstanceOf[String],
+                     url = map.get("url").asInstanceOf[String])        
+      }
+    }.toSeq
   }
 
   def getPageSummaries(spaceKey: String): Seq[PageSummary] = {
-    innerClient.getPages(spaceKey).asInstanceOf[JList[InnerPageSummary]].map(
-      innerPageSummary =>
-        PageSummary(id = innerPageSummary.getId,
-                    space = innerPageSummary.getSpace,
-                    parentId = innerPageSummary.getParentId,
-                    title = innerPageSummary.getTitle,
-                    url = innerPageSummary.getUrl,
-                    locks = innerPageSummary.getLocks)
-    )
+    val pages = innerClient.execute("confluence2.getPages", Array[AnyRef](token, spaceKey)).asInstanceOf[Array[AnyRef]]
+    pages.map {
+      page => {
+        val map = page.asInstanceOf[JMap[String, AnyRef]]
+        PageSummary(id = map.get("id").asInstanceOf[String],
+                    space = map.get("space").asInstanceOf[String],
+                    parentId = map.get("parentId").asInstanceOf[String],
+                    title = map.get("title").asInstanceOf[String],
+                    url = map.get("url").asInstanceOf[String],
+                    locks = map.get("locks").asInstanceOf[Int])
+      }
+    }
+  }
+
+  private def getInt(o: AnyRef): Int = {
+    if (o.isInstanceOf[java.lang.Integer]) {
+      o.asInstanceOf[java.lang.Integer]
+    } else if (o.isInstanceOf[String]) {
+      o.asInstanceOf[String].toInt
+    } else {
+      throw new IllegalStateException("Value is unsupported type: " + o.getClass.getName)
+    }
+  }
+
+  private def getBoolean(o: AnyRef): Boolean = {
+    if (o.isInstanceOf[Boolean]) {
+      o.asInstanceOf[Boolean]
+    } else if (o.isInstanceOf[String]) {
+      o.asInstanceOf[String].toBoolean
+    } else {
+      throw new IllegalStateException("Value is unsupported type: " + o.getClass.getName)
+    }
+  }
+
+  private def convertMapToPage(map: JMap[String, AnyRef]): Page = {
+    Page(id = map.get("id").asInstanceOf[String],
+         space = map.get("space").asInstanceOf[String],
+         parentId = map.get("parentId").asInstanceOf[String],
+         title = map.get("title").asInstanceOf[String],
+         url = map.get("url").asInstanceOf[String],
+         version = getInt(map.get("version")),
+         content = map.get("content").asInstanceOf[String],
+         created = map.get("created").asInstanceOf[Date],
+         creator = map.get("creator").asInstanceOf[String],
+         modified = map.get("modified").asInstanceOf[Date],
+         modifier = map.get("modifier").asInstanceOf[String],
+         homePage = getBoolean(map.get("homePage")),
+         locks = map.get("locks").asInstanceOf[Int],
+         contentStatus = map.get("contentStatus").asInstanceOf[String],
+         current = getBoolean(map.get("current"))
+       )
   }
 
   def getPage(spaceKey: String, pageTitle: String): Page = {
-    val innerPage = innerClient.getPage(spaceKey, pageTitle)
-    convertInnerPageToPage(innerPage)
-  }
-
-  private def convertInnerPageToPage(innerPage: InnerPage): Page = {
-    Page(
-      id = innerPage.getId,
-      space = innerPage.getSpace,
-      parentId = innerPage.getParentId,
-      title = innerPage.getTitle,
-      url = innerPage.getUrl,
-      version = innerPage.getVersion,
-      content = innerPage.getContent,
-      created = innerPage.getCreated,
-      creator = innerPage.getCreator,
-      modified = innerPage.getModified,
-      modifier = innerPage.getModifier,
-      homePage = innerPage.isHomePage,
-      locks = innerPage.getLocks,
-      contentStatus = innerPage.getContentStatus,
-      current = innerPage.isCurrent)
+    val map = innerClient.execute("confluence2.getPage", Array[AnyRef](token, spaceKey, pageTitle)).asInstanceOf[JMap[String, AnyRef]]
+    convertMapToPage(map)
   }
 
   def createPage(spaceKey: String, title: String, content: String, parentId: String): Page = {
-    val page = new InnerPage
-    page.setSpace(spaceKey)
-    page.setTitle(title)
-    page.setContent(content)
-    page.setParentId(parentId)
-    val createdPage = innerClient.storePage(page)
-    convertInnerPageToPage(createdPage)
+    val map: JMap[String, AnyRef] = new JHashMap[String, AnyRef]
+    map.put("space", spaceKey)
+    map.put("title", title)
+    map.put("content", content)
+    map.put("parentId", parentId)
+    val page = innerClient.execute("confluence2.storePage", Array[AnyRef](token, map)).asInstanceOf[JMap[String, AnyRef]]
+    convertMapToPage(page)
   }
 
-  def movePage(page: Page, parentId: String): Page = {
-    val innerPage = new InnerPage
-    innerPage.setId(page.id)
-    innerPage.setSpace(page.space)
-    innerPage.setTitle(page.title)
-    innerPage.setContent(page.content)
-    innerPage.setVersion(page.version)
-    innerPage.setParentId(parentId)
-    val storedPage = innerClient.storePage(innerPage)
-    convertInnerPageToPage(storedPage)
+  def movePage(page: Page, parentId: String): Unit = {
+    innerClient.execute("confluence2.movePage", Array[AnyRef](token, page.id, parentId, "append"))
   }
 }
 

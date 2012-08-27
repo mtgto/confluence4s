@@ -1,18 +1,24 @@
 package net.mtgto.confluence4s
 
-import org.codehaus.swizzle.confluence.Confluence
+import org.apache.xmlrpc.client.{XmlRpcClient, XmlRpcClientConfigImpl}
+import java.net.URL
+
 /**
  * ClientFactory that creates new Client that communicate with Confluence using xml rpc.
  */
 object ClientFactory {
   def withClient(host: String, username: String, password: String)(f: Client => Unit) = {
-    val inner = new Confluence(host)
-    inner.login(username, password)
+    val clientConfig = new XmlRpcClientConfigImpl
+    clientConfig.setServerURL(new URL(host))
+    val inner = new XmlRpcClient
+    inner.setConfig(clientConfig)
+    val token = inner.execute("confluence2.login", Array[AnyRef](username, password)).asInstanceOf[String]
     try {
-      val client = new DefaultClient(inner)
+      val client = new DefaultClient(inner, token)
       f(client)
     } finally {
-      inner.logout
+      val result = inner.execute("confluence2.logout", Array[AnyRef](token))
+      println("logout result = " + result)
     }
   }
 }

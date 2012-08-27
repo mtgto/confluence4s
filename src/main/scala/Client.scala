@@ -9,5 +9,5 @@ trait Client {
 
   def createPage(spaceKey: String, title: String, content: String, parentId: String): Page
 
-  def movePage(page: Page, parentId: String): Page
+  def movePage(page: Page, parentId: String): Unit
 }

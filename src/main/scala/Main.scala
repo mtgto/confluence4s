@@ -9,7 +9,9 @@ object Main extends App {
       println("pages = " + pages)
       val page = client.getPage("SPACE", "XXXX-XX-XX")
       println("page = " + page)
-      client.createPage(page.space, "2012-08-01", page.content, page.parentId)
+      val parentPage = client.getPage("SPACE", "2012-08")
+      val childPage = client.createPage(page.space, "2012-08-03", page.content, page.parentId)
+      client.movePage(childPage, parentPage.id)
     }
   }
 }
