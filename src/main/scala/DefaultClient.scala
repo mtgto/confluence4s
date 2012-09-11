@@ -89,8 +89,8 @@ class DefaultClient(
     convertMapToPage(page)
   }
 
-  def movePage(page: Page, parentId: String): Unit = {
-    innerClient.execute("confluence2.movePage", Array[AnyRef](token, page.id, parentId, "append"))
+  def movePage(pageId: String, parentId: String, position: Position.Value = Position.APPEND): Unit = {
+    innerClient.execute("confluence2.movePage", Array[AnyRef](token, pageId, parentId, position.toString))
   }
 }
 
