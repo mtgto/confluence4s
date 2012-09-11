@@ -36,7 +36,7 @@ object Main extends App {
 			// create a new page
 			val page = client.createPage(spaces.head.key, "test page", "this is test", pages.head.id)
 			// move a page to another child
-			client.movePage(page, pages.last.id)
+			client.movePage(page.id, pages.last.id, Position.APPEND)
 		}
 	}
 }
