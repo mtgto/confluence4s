@@ -22,3 +22,5 @@ resolvers ++= Seq(
 )
 
 initialCommands := "import net.mtgto.confluence4s._"
+
+publishTo := Some(Resolver.file("file", new File("maven/")))
