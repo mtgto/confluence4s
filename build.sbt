@@ -4,7 +4,7 @@ name := "confluence4s"
 
 organization := "net.mtgto"
 
-version := "0.2.1"
+version := "0.2.2"
 
 scalaVersion := "2.9.2"
 
@@ -22,3 +22,5 @@ resolvers ++= Seq(
 )
 
 initialCommands := "import net.mtgto.confluence4s._"
+
+publishTo := Some(Resolver.file("file", new File("maven/")))
