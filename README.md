@@ -11,16 +11,16 @@ Fow now, confluence4s has following features.
 
 confluence4s uses [Apache XML-RPC](http://ws.apache.org/xmlrpc/index.html).
 
-# Getting started
-confluence4s currently does not have a maven repository.
-
-you need to publish yourself.
-
-```
-$ sbt publish-local
-```
-
 # How to use
+First, add maven repository of confuence4s to your configuration.
+If you use sbt, you write like below:
+
+```
+resolvers += "confluence4s repos" at "http://mtgto.github.com/confluence4s/maven/"
+```
+
+Now, you write the program to access confluence.
+
 ```scala
 import net.mtgto.confluence4s._
 
