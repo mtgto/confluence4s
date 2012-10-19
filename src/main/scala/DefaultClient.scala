@@ -1,5 +1,6 @@
 package net.mtgto.confluence4s
 
+import org.apache.xmlrpc.XmlRpcException
 import org.apache.xmlrpc.client.XmlRpcClient
 import scala.collection.JavaConversions._
 import java.util.{List => JList, Map => JMap, Date, HashMap => JHashMap}
@@ -8,30 +9,41 @@ class DefaultClient(
   val innerClient: XmlRpcClient,
   val token: String
 ) extends Client {
-  def getSpaceSummaries = {
-    val spaces = innerClient.execute("confluence2.getSpaces", Array[AnyRef](token)).asInstanceOf[Array[AnyRef]]
-    spaces.map {
-      space => {
-        val map = space.asInstanceOf[JMap[String, AnyRef]]
-        SpaceSummary(key = map.get("key").asInstanceOf[String],
-                     name = map.get("name").asInstanceOf[String],
-                     url = map.get("url").asInstanceOf[String])        
-      }
-    }.toSeq
+  @throws(classOf[ConfluenceException])
+  override def getSpaceSummaries = {
+    try {
+      val spaces = innerClient.execute("confluence2.getSpaces", Array[AnyRef](token)).asInstanceOf[Array[AnyRef]]
+      spaces.map {
+        space => {
+          val map = space.asInstanceOf[JMap[String, AnyRef]]
+          SpaceSummary(key = map.get("key").asInstanceOf[String],
+                       name = map.get("name").asInstanceOf[String],
+                       url = map.get("url").asInstanceOf[String])
+        }
+      }.toSeq
+    } catch {
+      case e: XmlRpcException => throw new ConfluenceException(e)
+      case e => throw e
+    }
   }
 
-  def getPageSummaries(spaceKey: String): Seq[PageSummary] = {
-    val pages = innerClient.execute("confluence2.getPages", Array[AnyRef](token, spaceKey)).asInstanceOf[Array[AnyRef]]
-    pages.map {
-      page => {
-        val map = page.asInstanceOf[JMap[String, AnyRef]]
-        PageSummary(id = map.get("id").asInstanceOf[String],
-                    space = map.get("space").asInstanceOf[String],
-                    parentId = map.get("parentId").asInstanceOf[String],
-                    title = map.get("title").asInstanceOf[String],
-                    url = map.get("url").asInstanceOf[String],
-                    locks = map.get("locks").asInstanceOf[Int])
+  override def getPageSummaries(spaceKey: String): Seq[PageSummary] = {
+    try {
+      val pages = innerClient.execute("confluence2.getPages", Array[AnyRef](token, spaceKey)).asInstanceOf[Array[AnyRef]]
+      pages.map {
+        page => {
+          val map = page.asInstanceOf[JMap[String, AnyRef]]
+          PageSummary(id = map.get("id").asInstanceOf[String],
+                      space = map.get("space").asInstanceOf[String],
+                      parentId = map.get("parentId").asInstanceOf[String],
+                      title = map.get("title").asInstanceOf[String],
+                      url = map.get("url").asInstanceOf[String],
+                      locks = map.get("locks").asInstanceOf[Int])
+        }
       }
+    } catch {
+      case e: XmlRpcException => throw new ConfluenceException(e)
+      case e => throw e
     }
   }
 
@@ -74,23 +86,38 @@ class DefaultClient(
        )
   }
 
-  def getPage(spaceKey: String, pageTitle: String): Page = {
-    val map = innerClient.execute("confluence2.getPage", Array[AnyRef](token, spaceKey, pageTitle)).asInstanceOf[JMap[String, AnyRef]]
-    convertMapToPage(map)
+  override def getPage(spaceKey: String, pageTitle: String): Page = {
+    try {
+      val map = innerClient.execute("confluence2.getPage", Array[AnyRef](token, spaceKey, pageTitle)).asInstanceOf[JMap[String, AnyRef]]
+      convertMapToPage(map)
+    } catch {
+      case e: XmlRpcException => throw new ConfluenceException(e)
+      case e => throw e
+    }
   }
 
-  def createPage(spaceKey: String, title: String, content: String, parentId: String): Page = {
+  override def createPage(spaceKey: String, title: String, content: String, parentId: String): Page = {
     val map: JMap[String, AnyRef] = new JHashMap[String, AnyRef]
     map.put("space", spaceKey)
     map.put("title", title)
     map.put("content", content)
     map.put("parentId", parentId)
-    val page = innerClient.execute("confluence2.storePage", Array[AnyRef](token, map)).asInstanceOf[JMap[String, AnyRef]]
-    convertMapToPage(page)
+    try {
+      val page = innerClient.execute("confluence2.storePage", Array[AnyRef](token, map)).asInstanceOf[JMap[String, AnyRef]]
+      convertMapToPage(page)
+    } catch {
+      case e: XmlRpcException => throw new ConfluenceException(e)
+      case e => throw e
+    }
   }
 
-  def movePage(pageId: String, parentId: String, position: Position.Value = Position.APPEND): Unit = {
-    innerClient.execute("confluence2.movePage", Array[AnyRef](token, pageId, parentId, position.toString))
+  override def movePage(pageId: String, parentId: String, position: Position.Value = Position.APPEND): Unit = {
+    try {
+      innerClient.execute("confluence2.movePage", Array[AnyRef](token, pageId, parentId, position.toString))
+    } catch {
+      case e: XmlRpcException => throw new ConfluenceException(e)
+      case e => throw e
+    }
   }
 }
 
