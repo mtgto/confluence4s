@@ -12,11 +12,15 @@ Fow now, confluence4s has following features.
 confluence4s uses [Apache XML-RPC](http://ws.apache.org/xmlrpc/index.html).
 
 # How to use
-First, add maven repository of confuence4s to your configuration.
+First, you add maven repository of confuence4s to your configuration.
+Next, you add confluence4s to library dependencies.
+
 If you use sbt, you write like below:
 
 ```
 resolvers += "confluence4s repos" at "http://mtgto.github.com/confluence4s/maven/"
+
+libraryDependencies += "net.mtgto" %% "confluence4s" % "0.3.0"
 ```
 
 Now, you write the program to access confluence.
@@ -41,3 +45,12 @@ object Main extends App {
 	}
 }
 ```
+
+# Licenses
+# Confluence4s
+Confluence4s is Licensed under the BSD license.
+
+For detail, see `LICENSE`.
+
+# Apache XML-RPC
+`Apache XML-RPC` is Licensed under the Apache License, Version 2.0(http://www.apache.org/licenses/LICENSE-2.0).
