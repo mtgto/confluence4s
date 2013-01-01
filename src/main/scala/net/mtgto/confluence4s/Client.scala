@@ -70,4 +70,21 @@ trait Client {
    */
   @throws(classOf[ConfluenceException])
   def getComments(pageId: String): Seq[Comment]
+
+  /**
+   * get the specified comment.
+   *
+   * @param commentId id of the specified comment.
+   */
+  @throws(classOf[ConfluenceException])
+  def getComment(commentId: String): Comment
+
+  /**
+   * create a comment in specified page.
+   *
+   * @param pageId id of the page to create a comment.
+   * @param content content of a comment
+   */
+  @throws(classOf[ConfluenceException])
+  def createComment(pageId: String, content: String): Comment
 }

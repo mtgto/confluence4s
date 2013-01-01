@@ -176,6 +176,29 @@ class ClientImpl(
       case e => throw e
     }
   }
+
+  override def getComment(commentId: String): Comment = {
+    try {
+      val map = innerClient.execute("confluence2.getComment", Array[AnyRef](token, commentId)).asInstanceOf[JMap[String, AnyRef]]
+      convertMapToComment(map)
+    } catch {
+      case e: XmlRpcException => throw new ConfluenceException(e)
+      case e => throw e
+    }
+  }
+
+  override def createComment(pageId: String, content: String): Comment = {
+    val map: JMap[String, AnyRef] = new JHashMap[String, AnyRef]
+    map.put("pageId", pageId)
+    map.put("content", content)
+    try {
+      val comment = innerClient.execute("confluence2.addComment", Array[AnyRef](token, map)).asInstanceOf[JMap[String, AnyRef]]
+      convertMapToComment(comment)
+    } catch {
+      case e: XmlRpcException => throw new ConfluenceException(e)
+      case e => throw e
+    }
+  }
 }
 
 
