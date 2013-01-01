@@ -199,6 +199,16 @@ class ClientImpl(
       case e => throw e
     }
   }
+
+  override def removeComment(commentId: String): Boolean = {
+    try {
+      val result = innerClient.execute("confluence2.removeComment", Array[AnyRef](token, commentId))
+      getBoolean(result)
+    } catch {
+      case e: XmlRpcException => throw new ConfluenceException(e)
+      case e => throw e
+    }
+  }
 }
 
 

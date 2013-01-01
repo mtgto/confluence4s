@@ -87,4 +87,12 @@ trait Client {
    */
   @throws(classOf[ConfluenceException])
   def createComment(pageId: String, content: String): Comment
+
+  /**
+   * remove a comment.
+   *
+   * @param commentId id of the specified comment to be removed.
+   */
+  @throws(classOf[ConfluenceException])
+  def removeComment(commentId: String): Boolean
 }
