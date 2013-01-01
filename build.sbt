@@ -4,15 +4,17 @@ name := "confluence4s"
 
 organization := "net.mtgto"
 
-version := "0.3.0"
+version := "0.4.0"
 
 scalaVersion := "2.9.2"
+
+crossScalaVersions := Seq("2.9.1", "2.9.2")
 
 scalacOptions ++= Seq("-deprecation", "-unchecked", "-encoding", "UTF8")
 
 libraryDependencies ++= Seq(
   "org.apache.xmlrpc" % "xmlrpc-dist" % "3.1.3",
-  "org.specs2" %% "specs2" % "1.12.2" % "test"
+  "org.specs2" %% "specs2" % "1.12.3" % "test"
 )
 
 initialCommands := "import net.mtgto.confluence4s._"
