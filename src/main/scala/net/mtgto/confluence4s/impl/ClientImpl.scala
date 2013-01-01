@@ -117,6 +117,16 @@ class ClientImpl(
     }
   }
 
+  override def getPage(id: String): Page = {
+    try {
+      val map = innerClient.execute("confluence2.getPage", Array[AnyRef](token, id)).asInstanceOf[JMap[String, AnyRef]]
+      convertMapToPage(map)
+    } catch {
+      case e: XmlRpcException => throw new ConfluenceException(e)
+      case e => throw e
+    }
+  }
+
   override def createPage(spaceKey: String, title: String, content: String, parentId: String): Page = {
     val map: JMap[String, AnyRef] = new JHashMap[String, AnyRef]
     map.put("space", spaceKey)

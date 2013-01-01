@@ -36,6 +36,14 @@ trait Client {
   def getPage(spaceKey: String, pageTitle: String): Page
 
   /**
+   * get the content of page specified by id.
+   *
+   * @param id id of the page.
+   */
+  @throws(classOf[ConfluenceException])
+  def getPage(id: String): Page
+
+  /**
    * create a new page in specified space.
    *
    * @param spaceKey the space to create a page.
