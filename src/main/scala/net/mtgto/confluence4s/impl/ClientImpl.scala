@@ -1,7 +1,7 @@
 package net.mtgto.confluence4s.impl
 
 import net.mtgto.confluence4s.{Client, ConfluenceException}
-import net.mtgto.confluence4s.{Comment, Page, PageSummary, Position, Space, SpaceSummary}
+import net.mtgto.confluence4s.{Attachment, Comment, Page, PageSummary, Position, Space, SpaceSummary}
 import org.apache.xmlrpc.XmlRpcException
 import org.apache.xmlrpc.client.XmlRpcClient
 import scala.collection.JavaConversions._
@@ -204,6 +204,44 @@ class ClientImpl(
     try {
       val result = innerClient.execute("confluence2.removeComment", Array[AnyRef](token, commentId))
       getBoolean(result)
+    } catch {
+      case e: XmlRpcException => throw new ConfluenceException(e)
+      case e => throw e
+    }
+  }
+
+  private def convertMapToAttachment(map: JMap[String, AnyRef]): Attachment = {
+    Attachment(id = map.get("id").asInstanceOf[String],
+               pageId = map.get("pageId").asInstanceOf[String],
+               title = map.get("title").asInstanceOf[String],
+               fileName = map.get("fileName").asInstanceOf[String],
+               fileSize = map.get("fileSize").asInstanceOf[String],
+               contentType = map.get("contentType").asInstanceOf[String],
+               created = map.get("created").asInstanceOf[Date],
+               creator = map.get("creator").asInstanceOf[String],
+               url = map.get("url").asInstanceOf[String],
+               comment = map.get("comment").asInstanceOf[String]
+          )
+  }
+
+  override def getAttachments(pageId: String): Seq[Attachment] = {
+    try {
+      val attachments = innerClient.execute("confluence2.getAttachments", Array[AnyRef](token, pageId)).asInstanceOf[Array[AnyRef]]
+      attachments.map(
+        attachment => {
+          val map = attachment.asInstanceOf[JMap[String, AnyRef]]
+          convertMapToAttachment(map)
+        }
+      )
+    } catch {
+      case e: XmlRpcException => throw new ConfluenceException(e)
+      case e => throw e
+    }
+  }
+
+  override def getAttachmentData(pageId: String, fileName: String): Array[Byte] = {
+    try {
+      innerClient.execute("confluence2.getAttachmentData", Array[AnyRef](token, pageId, fileName, "0")).asInstanceOf[Array[Byte]]
     } catch {
       case e: XmlRpcException => throw new ConfluenceException(e)
       case e => throw e

@@ -95,4 +95,21 @@ trait Client {
    */
   @throws(classOf[ConfluenceException])
   def removeComment(commentId: String): Boolean
+
+  /**
+   * get all attachments for the page.
+   *
+   * @param pageId id of the page to get attachments.
+   */
+  @throws(classOf[ConfluenceException])
+  def getAttachments(pageId: String): Seq[Attachment]
+
+  /**
+   * get the data of the specified attachment (for current version).
+   *
+   * @param pageId id of the page to get the attachment.
+   * @param fileName filename
+   */
+  @throws(classOf[ConfluenceException])
+  def getAttachmentData(pageId: String, fileName: String): Array[Byte]
 }
