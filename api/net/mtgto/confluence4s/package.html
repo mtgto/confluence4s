@@ -1,0 +1,208 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN" "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">
+<html>
+        <head>
+          <title>net.mtgto.confluence4s</title>
+          <meta http-equiv="content-type" content="text/html; charset=UTF-8" />
+          
+      <link type="text/css" media="screen" rel="stylesheet" href="../../../lib/template.css" />
+      <script type="text/javascript" src="../../../lib/jquery.js"></script>
+      <script type="text/javascript" src="../../../lib/jquery-ui.js"></script>
+      <script type="text/javascript" src="../../../lib/template.js"></script>
+      <script type="text/javascript" src="../../../lib/tools.tooltip.js"></script>
+    
+        </head>
+        <body onload="sh_highlightDocument('../lib/', '.min.js');" class="value">
+      <div id="definition">
+        <img src="../../../lib/package_big.png" />
+        <p id="owner"><a name="net" class="extype" href="../../package.html">net</a>.<a name="net.mtgto" class="extype" href="../package.html">mtgto</a></p>
+        <h1>confluence4s</h1>
+      </div>
+
+      <h4 class="signature" id="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">package</span>
+      </span>
+      <span class="symbol">
+        <span class="name">confluence4s</span>
+      </span>
+      </h4>
+      
+      <div class="fullcommenttop" id="comment"></div>
+    
+
+      <div id="mbrsel">
+        <div id="textfilter"><span class="pre"></span><span class="input"><input accesskey="/" type="text" /></span><span class="post"></span></div>
+        
+        
+        <div id="visbl">
+            <span class="filtertype">Visibility</span>
+            <ol><li class="public in"><span>Public</span></li><li class="all out"><span>All</span></li></ol>
+          </div>
+      </div>
+
+      <div id="template">
+        <div id="allMembers">
+        
+
+        <div class="types members" id="types">
+              <h3>Type Members</h3>
+              <ol><li visbl="pub" name="net.mtgto.confluence4s.Attachment" data-isabs="false">
+      <a id="Attachment:Attachment"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">case class</span>
+      </span>
+      <span class="symbol">
+        <a href="Attachment.html"><span class="name">Attachment</span></a><span class="params">(<span name="id">id: String</span>, <span name="pageId">pageId: String</span>, <span name="title">title: String</span>, <span name="fileName">fileName: String</span>, <span name="fileSize">fileSize: String</span>, <span name="contentType">contentType: String</span>, <span name="created">created: Date</span>, <span name="creator">creator: String</span>, <span name="url">url: String</span>, <span name="comment">comment: String</span>)</span><span class="result"> extends Product with Serializable</span>
+      </span>
+      </h4>
+      <p class="comment cmt">The entity model of the attachment.</p>
+    </li><li visbl="pub" name="net.mtgto.confluence4s.Client" data-isabs="true">
+      <a id="Client:Client"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">trait</span>
+      </span>
+      <span class="symbol">
+        <a href="Client.html"><span class="name">Client</span></a><span class="result"> extends AnyRef</span>
+      </span>
+      </h4>
+      <p class="comment cmt">The client to access to Confluence.</p>
+    </li><li visbl="pub" name="net.mtgto.confluence4s.Comment" data-isabs="false">
+      <a id="Comment:Comment"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">case class</span>
+      </span>
+      <span class="symbol">
+        <a href="Comment.html"><span class="name">Comment</span></a><span class="params">(<span name="id">id: String</span>, <span name="pageId">pageId: String</span>, <span name="title">title: String</span>, <span name="content">content: String</span>, <span name="url">url: String</span>, <span name="created">created: Date</span>, <span name="creator">creator: String</span>)</span><span class="result"> extends Product with Serializable</span>
+      </span>
+      </h4>
+      <p class="comment cmt">The entity model of the comment.</p>
+    </li><li visbl="pub" name="net.mtgto.confluence4s.ConfluenceException" data-isabs="false">
+      <a id="ConfluenceException:ConfluenceException"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">class</span>
+      </span>
+      <span class="symbol">
+        <a href="ConfluenceException.html"><span class="name">ConfluenceException</span></a><span class="result"> extends RuntimeException</span>
+      </span>
+      </h4>
+      
+    </li><li visbl="pub" name="net.mtgto.confluence4s.Page" data-isabs="false">
+      <a id="Page:Page"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">case class</span>
+      </span>
+      <span class="symbol">
+        <a href="Page.html"><span class="name">Page</span></a><span class="params">(<span name="id">id: String</span>, <span name="space">space: String</span>, <span name="parentId">parentId: String</span>, <span name="title">title: String</span>, <span name="url">url: String</span>, <span name="version">version: Int</span>, <span name="content">content: String</span>, <span name="created">created: Date</span>, <span name="creator">creator: String</span>, <span name="modified">modified: Date</span>, <span name="modifier">modifier: String</span>, <span name="homePage">homePage: Boolean</span>, <span name="locks">locks: Int</span>, <span name="contentStatus">contentStatus: String</span>, <span name="current">current: Boolean</span>)</span><span class="result"> extends Product with Serializable</span>
+      </span>
+      </h4>
+      <p class="comment cmt">The entity model of the page.</p>
+    </li><li visbl="pub" name="net.mtgto.confluence4s.PageSummary" data-isabs="false">
+      <a id="PageSummary:PageSummary"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">case class</span>
+      </span>
+      <span class="symbol">
+        <a href="PageSummary.html"><span class="name">PageSummary</span></a><span class="params">(<span name="id">id: String</span>, <span name="space">space: String</span>, <span name="parentId">parentId: String</span>, <span name="title">title: String</span>, <span name="url">url: String</span>, <span name="locks">locks: Int</span>)</span><span class="result"> extends Product with Serializable</span>
+      </span>
+      </h4>
+      <p class="comment cmt">The entity model of the summary of page.</p>
+    </li><li visbl="pub" name="net.mtgto.confluence4s.Space" data-isabs="false">
+      <a id="Space:Space"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">case class</span>
+      </span>
+      <span class="symbol">
+        <a href="Space.html"><span class="name">Space</span></a><span class="params">(<span name="key">key: String</span>, <span name="name">name: String</span>, <span name="url">url: String</span>, <span name="homePage">homePage: String</span>, <span name="description">description: String</span>)</span><span class="result"> extends Product with Serializable</span>
+      </span>
+      </h4>
+      <p class="comment cmt">The entity model of the space.</p>
+    </li><li visbl="pub" name="net.mtgto.confluence4s.SpaceSummary" data-isabs="false">
+      <a id="SpaceSummary:SpaceSummary"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">case class</span>
+      </span>
+      <span class="symbol">
+        <a href="SpaceSummary.html"><span class="name">SpaceSummary</span></a><span class="params">(<span name="key">key: String</span>, <span name="name">name: String</span>, <span name="url">url: String</span>)</span><span class="result"> extends Product with Serializable</span>
+      </span>
+      </h4>
+      <p class="comment cmt">The entity model of the summary of space.</p>
+    </li></ol>
+            </div>
+
+        
+
+        <div class="values members" id="values">
+              <h3>Value Members</h3>
+              <ol><li visbl="pub" name="net.mtgto.confluence4s.ClientFactory" data-isabs="false">
+      <a id="ClientFactory:ClientFactory"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">object</span>
+      </span>
+      <span class="symbol">
+        <a href="ClientFactory$.html"><span class="name">ClientFactory</span></a><span class="result"> extends AnyRef</span>
+      </span>
+      </h4>
+      <p class="comment cmt">ClientFactory that creates new Client that communicate with Confluence using xml rpc.</p>
+    </li><li visbl="pub" name="net.mtgto.confluence4s.Position" data-isabs="false">
+      <a id="Position:Position"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">object</span>
+      </span>
+      <span class="symbol">
+        <a href="Position$.html"><span class="name">Position</span></a><span class="result"> extends Enumeration</span>
+      </span>
+      </h4>
+      <p class="comment cmt">destination positions of page.</p>
+    </li><li visbl="pub" name="net.mtgto.confluence4s.impl" data-isabs="false">
+      <a id="impl:impl"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">package</span>
+      </span>
+      <span class="symbol">
+        <a href="impl/package.html"><span class="name">impl</span></a>
+      </span>
+      </h4>
+      
+    </li></ol>
+            </div>
+
+        
+        </div>
+
+        <div id="inheritedMembers">
+        
+        </div>
+
+      </div>
+
+      <div id="tooltip"></div>
+
+      <div id="footer">  </div>
+
+
+    </body>
+      </html>
