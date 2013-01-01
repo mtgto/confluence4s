@@ -2,12 +2,25 @@ confluence4s
 ========
 confluence4s is a library to easily access to Atlassian Confluence XML-RPC API written by Scala.
 
+Confluence4s supports limited features.
 Fow now, confluence4s has following features.
 
-- get all space summaries
-- get all page summaries
-- create a new page
-- move a page to another child page
+- Spaces
+ - get all space summaries (getSpaceSummaries)
+ - get the detailed space (getSpace)
+- Pages
+ - get all page summaries (getPageSummaries)
+ - get the detailed page (getPage)
+ - create a new page (storePage)
+ - move a page to another child or sibling page
+- Comments
+ - get all comments in page (getComments)
+ - get the specified comment (getComment)
+ - create a new comment (addComment)
+ - remove an existing comment (removeComment)
+- Attachments
+ - get all attachments in page (getAttachments)
+ - get binary data of the attachment (getAttachmentData)
 
 confluence4s uses [Apache XML-RPC](http://ws.apache.org/xmlrpc/index.html).
 
@@ -20,7 +33,7 @@ If you use sbt, you write like below:
 ```
 resolvers += "confluence4s repos" at "http://mtgto.github.com/confluence4s/maven/"
 
-libraryDependencies += "net.mtgto" %% "confluence4s" % "0.3.0"
+libraryDependencies += "net.mtgto" %% "confluence4s" % "0.4.0"
 ```
 
 Now, you write the program to access confluence.
@@ -41,6 +54,13 @@ object Main extends App {
 			val page = client.createPage(spaces.head.key, "test page", "this is test", pages.head.id)
 			// move a page to another child
 			client.movePage(page.id, pages.last.id, Position.APPEND)
+            // get all comments in the page
+            val comments = client.getComments(page.id)
+            comments.foreach (println)
+            // get all attachments in the page
+            val attachments = client.getAttachments(page.id)
+            // get binary data of the attachment
+            val data: Array[Byte] = client.getAttachmentData(page.id, attachments.head.fileName)
 		}
 	}
 }
