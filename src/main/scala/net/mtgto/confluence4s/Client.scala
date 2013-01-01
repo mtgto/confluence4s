@@ -1,5 +1,8 @@
 package net.mtgto.confluence4s
 
+/**
+ * The client to access to Confluence.
+ */
 trait Client {
   /**
    * get all space summaries of the confluence.
