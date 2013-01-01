@@ -29,6 +29,25 @@ class ClientImpl(
     }
   }
 
+  private def convertMapToSpace(map: JMap[String, AnyRef]): Space = {
+    Space(key = map.get("key").asInstanceOf[String],
+          name = map.get("name").asInstanceOf[String],
+          url = map.get("url").asInstanceOf[String],
+          homePage = map.get("homePage").asInstanceOf[String],
+          description = map.get("description").asInstanceOf[String]
+        )
+  }
+
+  override def getSpace(key: String): Space = {
+    try {
+      val space = innerClient.execute("confluence2.getSpace", Array[AnyRef](token, key)).asInstanceOf[JMap[String, AnyRef]]
+      convertMapToSpace(space)
+    } catch {
+      case e: XmlRpcException => throw new ConfluenceException(e)
+      case e => throw e
+    }
+  }
+
   override def getPageSummaries(spaceKey: String): Seq[PageSummary] = {
     try {
       val pages = innerClient.execute("confluence2.getPages", Array[AnyRef](token, spaceKey)).asInstanceOf[Array[AnyRef]]

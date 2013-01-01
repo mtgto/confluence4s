@@ -11,6 +11,14 @@ trait Client {
   def getSpaceSummaries: Seq[SpaceSummary]
 
   /**
+   * get the space by its key.
+   *
+   * @param key the key of the space.
+   */
+  @throws(classOf[ConfluenceException])
+  def getSpace(key: String): Space
+
+  /**
    * get all page summaries of specified space.
    *
    * @param spaceKey space to get the page summaries.
