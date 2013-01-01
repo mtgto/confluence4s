@@ -19,7 +19,6 @@ object ClientFactory {
       f(client)
     } finally {
       val result = inner.execute("confluence2.logout", Array[AnyRef](token))
-      println("logout result = " + result)
     }
   }
 }
