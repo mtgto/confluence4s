@@ -1,11 +1,13 @@
-package net.mtgto.confluence4s
+package net.mtgto.confluence4s.impl
 
+import net.mtgto.confluence4s.{Client, ConfluenceException}
+import net.mtgto.confluence4s.{Page, PageSummary, Position, Space, SpaceSummary}
 import org.apache.xmlrpc.XmlRpcException
 import org.apache.xmlrpc.client.XmlRpcClient
 import scala.collection.JavaConversions._
 import java.util.{List => JList, Map => JMap, Date, HashMap => JHashMap}
 
-class DefaultClient(
+class ClientImpl(
   val innerClient: XmlRpcClient,
   val token: String
 ) extends Client {
