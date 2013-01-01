@@ -1,7 +1,7 @@
 package net.mtgto.confluence4s.impl
 
 import net.mtgto.confluence4s.{Client, ConfluenceException}
-import net.mtgto.confluence4s.{Page, PageSummary, Position, Space, SpaceSummary}
+import net.mtgto.confluence4s.{Comment, Page, PageSummary, Position, Space, SpaceSummary}
 import org.apache.xmlrpc.XmlRpcException
 import org.apache.xmlrpc.client.XmlRpcClient
 import scala.collection.JavaConversions._
@@ -150,6 +150,34 @@ class ClientImpl(
       case e => throw e
     }
   }
+
+  private def convertMapToComment(map: JMap[String, AnyRef]): Comment = {
+    Comment(id = map.get("id").asInstanceOf[String],
+            pageId = map.get("pageId").asInstanceOf[String],
+            title = map.get("title").asInstanceOf[String],
+            content = map.get("content").asInstanceOf[String],
+            url = map.get("url").asInstanceOf[String],
+            created = map.get("created").asInstanceOf[Date],
+            creator = map.get("creator").asInstanceOf[String]
+          )
+  }
+
+  override def getComments(pageId: String): Seq[Comment] = {
+    try {
+      val comments = innerClient.execute("confluence2.getComments", Array[AnyRef](token, pageId)).asInstanceOf[Array[AnyRef]]
+      comments.map(
+        comment => {
+          val map = comment.asInstanceOf[JMap[String, AnyRef]]
+          convertMapToComment(map)
+        }
+      )
+    } catch {
+      case e: XmlRpcException => throw new ConfluenceException(e)
+      case e => throw e
+    }
+  }
 }
+
+
 
 

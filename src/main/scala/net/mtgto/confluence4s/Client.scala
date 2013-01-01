@@ -62,4 +62,12 @@ trait Client {
    */
   @throws(classOf[ConfluenceException])
   def movePage(pageId: String, parentId: String, position: Position.Value = Position.APPEND): Unit
+
+  /**
+   * get all comments for the page.
+   *
+   * @param pageId id of the page to get comments.
+   */
+  @throws(classOf[ConfluenceException])
+  def getComments(pageId: String): Seq[Comment]
 }
