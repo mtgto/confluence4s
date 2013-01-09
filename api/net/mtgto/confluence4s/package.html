@@ -2,24 +2,39 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN" "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">
 <html>
         <head>
-          <title>net.mtgto.confluence4s</title>
+          <title>confluence4s - net.mtgto.confluence4s</title>
+          <meta name="description" content="confluence4s - net.mtgto.confluence4s" />
+          <meta name="keywords" content="confluence4s net.mtgto.confluence4s" />
           <meta http-equiv="content-type" content="text/html; charset=UTF-8" />
           
-      <link type="text/css" media="screen" rel="stylesheet" href="../../../lib/template.css" />
-      <script type="text/javascript" src="../../../lib/jquery.js"></script>
+      <link href="../../../lib/template.css" media="screen" type="text/css" rel="stylesheet" />
+      <link href="../../../lib/diagrams.css" media="screen" type="text/css" rel="stylesheet" id="diagrams-css" />
+      <script type="text/javascript" src="../../../lib/jquery.js" id="jquery-js"></script>
       <script type="text/javascript" src="../../../lib/jquery-ui.js"></script>
       <script type="text/javascript" src="../../../lib/template.js"></script>
       <script type="text/javascript" src="../../../lib/tools.tooltip.js"></script>
+      
+      <script type="text/javascript">
+         if(top === self) {
+            var url = '../../../index.html';
+            var hash = 'net.mtgto.confluence4s.package';
+            var anchor = window.location.hash;
+            var anchor_opt = '';
+            if (anchor.length >= 1)
+              anchor_opt = '@' + anchor.substring(1);
+            window.location.href = url + '#' + hash + anchor_opt;
+         }
+   	  </script>
     
         </head>
-        <body onload="sh_highlightDocument('../lib/', '.min.js');" class="value">
+        <body class="value">
       <div id="definition">
         <img src="../../../lib/package_big.png" />
-        <p id="owner"><a name="net" class="extype" href="../../package.html">net</a>.<a name="net.mtgto" class="extype" href="../package.html">mtgto</a></p>
+        <p id="owner"><a href="../../package.html" class="extype" name="net">net</a>.<a href="../package.html" class="extype" name="net.mtgto">mtgto</a></p>
         <h1>confluence4s</h1>
       </div>
 
-      <h4 class="signature" id="signature">
+      <h4 id="signature" class="signature">
       <span class="modifier_kind">
         <span class="modifier"></span>
         <span class="kind">package</span>
@@ -29,11 +44,11 @@
       </span>
       </h4>
       
-      <div class="fullcommenttop" id="comment"></div>
-    
+          <div id="comment" class="fullcommenttop"></div>
+        
 
       <div id="mbrsel">
-        <div id="textfilter"><span class="pre"></span><span class="input"><input accesskey="/" type="text" /></span><span class="post"></span></div>
+        <div id="textfilter"><span class="pre"></span><span class="input"><input id="mbrsel-input" type="text" accesskey="/" /></span><span class="post"></span></div>
         
         
         <div id="visbl">
@@ -46,9 +61,10 @@
         <div id="allMembers">
         
 
-        <div class="types members" id="types">
+        <div id="types" class="types members">
               <h3>Type Members</h3>
-              <ol><li visbl="pub" name="net.mtgto.confluence4s.Attachment" data-isabs="false">
+              <ol><li name="net.mtgto.confluence4s.Attachment" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
+      <a id="AttachmentextendsProductwithSerializable"></a>
       <a id="Attachment:Attachment"></a>
       <h4 class="signature">
       <span class="modifier_kind">
@@ -56,11 +72,12 @@
         <span class="kind">case class</span>
       </span>
       <span class="symbol">
-        <a href="Attachment.html"><span class="name">Attachment</span></a><span class="params">(<span name="id">id: String</span>, <span name="pageId">pageId: String</span>, <span name="title">title: String</span>, <span name="fileName">fileName: String</span>, <span name="fileSize">fileSize: String</span>, <span name="contentType">contentType: String</span>, <span name="created">created: Date</span>, <span name="creator">creator: String</span>, <span name="url">url: String</span>, <span name="comment">comment: String</span>)</span><span class="result"> extends Product with Serializable</span>
+        <a href="Attachment.html"><span class="name">Attachment</span></a><span class="params">(<span name="id">id: <span class="extype" name="scala.Predef.String">String</span></span>, <span name="pageId">pageId: <span class="extype" name="scala.Predef.String">String</span></span>, <span name="title">title: <span class="extype" name="scala.Predef.String">String</span></span>, <span name="fileName">fileName: <span class="extype" name="scala.Predef.String">String</span></span>, <span name="fileSize">fileSize: <span class="extype" name="scala.Predef.String">String</span></span>, <span name="contentType">contentType: <span class="extype" name="scala.Predef.String">String</span></span>, <span name="created">created: <span class="extype" name="java.util.Date">Date</span></span>, <span name="creator">creator: <span class="extype" name="scala.Predef.String">String</span></span>, <span name="url">url: <span class="extype" name="scala.Predef.String">String</span></span>, <span name="comment">comment: <span class="extype" name="scala.Predef.String">String</span></span>)</span><span class="result"> extends <span class="extype" name="scala.Product">Product</span> with <span class="extype" name="scala.Serializable">Serializable</span></span>
       </span>
       </h4>
       <p class="comment cmt">The entity model of the attachment.</p>
-    </li><li visbl="pub" name="net.mtgto.confluence4s.Client" data-isabs="true">
+    </li><li name="net.mtgto.confluence4s.Client" visbl="pub" data-isabs="true" fullComment="no" group="Ungrouped">
+      <a id="ClientextendsObject"></a>
       <a id="Client:Client"></a>
       <h4 class="signature">
       <span class="modifier_kind">
@@ -68,11 +85,12 @@
         <span class="kind">trait</span>
       </span>
       <span class="symbol">
-        <a href="Client.html"><span class="name">Client</span></a><span class="result"> extends AnyRef</span>
+        <a href="Client.html"><span class="name">Client</span></a><span class="result"> extends <span class="extype" name="scala.AnyRef">AnyRef</span></span>
       </span>
       </h4>
       <p class="comment cmt">The client to access to Confluence.</p>
-    </li><li visbl="pub" name="net.mtgto.confluence4s.Comment" data-isabs="false">
+    </li><li name="net.mtgto.confluence4s.Comment" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
+      <a id="CommentextendsProductwithSerializable"></a>
       <a id="Comment:Comment"></a>
       <h4 class="signature">
       <span class="modifier_kind">
@@ -80,11 +98,12 @@
         <span class="kind">case class</span>
       </span>
       <span class="symbol">
-        <a href="Comment.html"><span class="name">Comment</span></a><span class="params">(<span name="id">id: String</span>, <span name="pageId">pageId: String</span>, <span name="title">title: String</span>, <span name="content">content: String</span>, <span name="url">url: String</span>, <span name="created">created: Date</span>, <span name="creator">creator: String</span>)</span><span class="result"> extends Product with Serializable</span>
+        <a href="Comment.html"><span class="name">Comment</span></a><span class="params">(<span name="id">id: <span class="extype" name="scala.Predef.String">String</span></span>, <span name="pageId">pageId: <span class="extype" name="scala.Predef.String">String</span></span>, <span name="title">title: <span class="extype" name="scala.Predef.String">String</span></span>, <span name="content">content: <span class="extype" name="scala.Predef.String">String</span></span>, <span name="url">url: <span class="extype" name="scala.Predef.String">String</span></span>, <span name="created">created: <span class="extype" name="java.util.Date">Date</span></span>, <span name="creator">creator: <span class="extype" name="scala.Predef.String">String</span></span>)</span><span class="result"> extends <span class="extype" name="scala.Product">Product</span> with <span class="extype" name="scala.Serializable">Serializable</span></span>
       </span>
       </h4>
       <p class="comment cmt">The entity model of the comment.</p>
-    </li><li visbl="pub" name="net.mtgto.confluence4s.ConfluenceException" data-isabs="false">
+    </li><li name="net.mtgto.confluence4s.ConfluenceException" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
+      <a id="ConfluenceExceptionextendsRuntimeException"></a>
       <a id="ConfluenceException:ConfluenceException"></a>
       <h4 class="signature">
       <span class="modifier_kind">
@@ -92,11 +111,12 @@
         <span class="kind">class</span>
       </span>
       <span class="symbol">
-        <a href="ConfluenceException.html"><span class="name">ConfluenceException</span></a><span class="result"> extends RuntimeException</span>
+        <a href="ConfluenceException.html"><span class="name">ConfluenceException</span></a><span class="result"> extends <span class="extype" name="java.lang.RuntimeException">RuntimeException</span></span>
       </span>
       </h4>
       
-    </li><li visbl="pub" name="net.mtgto.confluence4s.Page" data-isabs="false">
+    </li><li name="net.mtgto.confluence4s.Page" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
+      <a id="PageextendsProductwithSerializable"></a>
       <a id="Page:Page"></a>
       <h4 class="signature">
       <span class="modifier_kind">
@@ -104,11 +124,12 @@
         <span class="kind">case class</span>
       </span>
       <span class="symbol">
-        <a href="Page.html"><span class="name">Page</span></a><span class="params">(<span name="id">id: String</span>, <span name="space">space: String</span>, <span name="parentId">parentId: String</span>, <span name="title">title: String</span>, <span name="url">url: String</span>, <span name="version">version: Int</span>, <span name="content">content: String</span>, <span name="created">created: Date</span>, <span name="creator">creator: String</span>, <span name="modified">modified: Date</span>, <span name="modifier">modifier: String</span>, <span name="homePage">homePage: Boolean</span>, <span name="locks">locks: Int</span>, <span name="contentStatus">contentStatus: String</span>, <span name="current">current: Boolean</span>)</span><span class="result"> extends Product with Serializable</span>
+        <a href="Page.html"><span class="name">Page</span></a><span class="params">(<span name="id">id: <span class="extype" name="scala.Predef.String">String</span></span>, <span name="space">space: <span class="extype" name="scala.Predef.String">String</span></span>, <span name="parentId">parentId: <span class="extype" name="scala.Predef.String">String</span></span>, <span name="title">title: <span class="extype" name="scala.Predef.String">String</span></span>, <span name="url">url: <span class="extype" name="scala.Predef.String">String</span></span>, <span name="version">version: <span class="extype" name="scala.Int">Int</span></span>, <span name="content">content: <span class="extype" name="scala.Predef.String">String</span></span>, <span name="created">created: <span class="extype" name="java.util.Date">Date</span></span>, <span name="creator">creator: <span class="extype" name="scala.Predef.String">String</span></span>, <span name="modified">modified: <span class="extype" name="java.util.Date">Date</span></span>, <span name="modifier">modifier: <span class="extype" name="scala.Predef.String">String</span></span>, <span name="homePage">homePage: <span class="extype" name="scala.Boolean">Boolean</span></span>, <span name="locks">locks: <span class="extype" name="scala.Int">Int</span></span>, <span name="contentStatus">contentStatus: <span class="extype" name="scala.Predef.String">String</span></span>, <span name="current">current: <span class="extype" name="scala.Boolean">Boolean</span></span>)</span><span class="result"> extends <span class="extype" name="scala.Product">Product</span> with <span class="extype" name="scala.Serializable">Serializable</span></span>
       </span>
       </h4>
       <p class="comment cmt">The entity model of the page.</p>
-    </li><li visbl="pub" name="net.mtgto.confluence4s.PageSummary" data-isabs="false">
+    </li><li name="net.mtgto.confluence4s.PageSummary" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
+      <a id="PageSummaryextendsProductwithSerializable"></a>
       <a id="PageSummary:PageSummary"></a>
       <h4 class="signature">
       <span class="modifier_kind">
@@ -116,11 +137,12 @@
         <span class="kind">case class</span>
       </span>
       <span class="symbol">
-        <a href="PageSummary.html"><span class="name">PageSummary</span></a><span class="params">(<span name="id">id: String</span>, <span name="space">space: String</span>, <span name="parentId">parentId: String</span>, <span name="title">title: String</span>, <span name="url">url: String</span>, <span name="locks">locks: Int</span>)</span><span class="result"> extends Product with Serializable</span>
+        <a href="PageSummary.html"><span class="name">PageSummary</span></a><span class="params">(<span name="id">id: <span class="extype" name="scala.Predef.String">String</span></span>, <span name="space">space: <span class="extype" name="scala.Predef.String">String</span></span>, <span name="parentId">parentId: <span class="extype" name="scala.Predef.String">String</span></span>, <span name="title">title: <span class="extype" name="scala.Predef.String">String</span></span>, <span name="url">url: <span class="extype" name="scala.Predef.String">String</span></span>, <span name="locks">locks: <span class="extype" name="scala.Int">Int</span></span>)</span><span class="result"> extends <span class="extype" name="scala.Product">Product</span> with <span class="extype" name="scala.Serializable">Serializable</span></span>
       </span>
       </h4>
       <p class="comment cmt">The entity model of the summary of page.</p>
-    </li><li visbl="pub" name="net.mtgto.confluence4s.Space" data-isabs="false">
+    </li><li name="net.mtgto.confluence4s.Space" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
+      <a id="SpaceextendsProductwithSerializable"></a>
       <a id="Space:Space"></a>
       <h4 class="signature">
       <span class="modifier_kind">
@@ -128,11 +150,12 @@
         <span class="kind">case class</span>
       </span>
       <span class="symbol">
-        <a href="Space.html"><span class="name">Space</span></a><span class="params">(<span name="key">key: String</span>, <span name="name">name: String</span>, <span name="url">url: String</span>, <span name="homePage">homePage: String</span>, <span name="description">description: String</span>)</span><span class="result"> extends Product with Serializable</span>
+        <a href="Space.html"><span class="name">Space</span></a><span class="params">(<span name="key">key: <span class="extype" name="scala.Predef.String">String</span></span>, <span name="name">name: <span class="extype" name="scala.Predef.String">String</span></span>, <span name="url">url: <span class="extype" name="scala.Predef.String">String</span></span>, <span name="homePage">homePage: <span class="extype" name="scala.Predef.String">String</span></span>, <span name="description">description: <span class="extype" name="scala.Predef.String">String</span></span>)</span><span class="result"> extends <span class="extype" name="scala.Product">Product</span> with <span class="extype" name="scala.Serializable">Serializable</span></span>
       </span>
       </h4>
       <p class="comment cmt">The entity model of the space.</p>
-    </li><li visbl="pub" name="net.mtgto.confluence4s.SpaceSummary" data-isabs="false">
+    </li><li name="net.mtgto.confluence4s.SpaceSummary" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
+      <a id="SpaceSummaryextendsProductwithSerializable"></a>
       <a id="SpaceSummary:SpaceSummary"></a>
       <h4 class="signature">
       <span class="modifier_kind">
@@ -140,7 +163,7 @@
         <span class="kind">case class</span>
       </span>
       <span class="symbol">
-        <a href="SpaceSummary.html"><span class="name">SpaceSummary</span></a><span class="params">(<span name="key">key: String</span>, <span name="name">name: String</span>, <span name="url">url: String</span>)</span><span class="result"> extends Product with Serializable</span>
+        <a href="SpaceSummary.html"><span class="name">SpaceSummary</span></a><span class="params">(<span name="key">key: <span class="extype" name="scala.Predef.String">String</span></span>, <span name="name">name: <span class="extype" name="scala.Predef.String">String</span></span>, <span name="url">url: <span class="extype" name="scala.Predef.String">String</span></span>)</span><span class="result"> extends <span class="extype" name="scala.Product">Product</span> with <span class="extype" name="scala.Serializable">Serializable</span></span>
       </span>
       </h4>
       <p class="comment cmt">The entity model of the summary of space.</p>
@@ -149,9 +172,10 @@
 
         
 
-        <div class="values members" id="values">
+        <div id="values" class="values members">
               <h3>Value Members</h3>
-              <ol><li visbl="pub" name="net.mtgto.confluence4s.ClientFactory" data-isabs="false">
+              <ol><li name="net.mtgto.confluence4s.ClientFactory" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
+      <a id="ClientFactory"></a>
       <a id="ClientFactory:ClientFactory"></a>
       <h4 class="signature">
       <span class="modifier_kind">
@@ -159,11 +183,12 @@
         <span class="kind">object</span>
       </span>
       <span class="symbol">
-        <a href="ClientFactory$.html"><span class="name">ClientFactory</span></a><span class="result"> extends AnyRef</span>
+        <a href="ClientFactory$.html"><span class="name">ClientFactory</span></a>
       </span>
       </h4>
       <p class="comment cmt">ClientFactory that creates new Client that communicate with Confluence using xml rpc.</p>
-    </li><li visbl="pub" name="net.mtgto.confluence4s.Position" data-isabs="false">
+    </li><li name="net.mtgto.confluence4s.Position" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
+      <a id="Position"></a>
       <a id="Position:Position"></a>
       <h4 class="signature">
       <span class="modifier_kind">
@@ -171,11 +196,12 @@
         <span class="kind">object</span>
       </span>
       <span class="symbol">
-        <a href="Position$.html"><span class="name">Position</span></a><span class="result"> extends Enumeration</span>
+        <a href="Position$.html"><span class="name">Position</span></a><span class="result"> extends <span class="extype" name="scala.Enumeration">Enumeration</span></span>
       </span>
       </h4>
       <p class="comment cmt">destination positions of page.</p>
-    </li><li visbl="pub" name="net.mtgto.confluence4s.impl" data-isabs="false">
+    </li><li name="net.mtgto.confluence4s.impl" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
+      <a id="impl"></a>
       <a id="impl:impl"></a>
       <h4 class="signature">
       <span class="modifier_kind">
@@ -191,10 +217,20 @@
             </div>
 
         
+
+        
         </div>
 
         <div id="inheritedMembers">
         
+        
+        </div>
+
+        <div id="groupedMembers">
+        <div class="group" name="Ungrouped">
+              <h3>Ungrouped</h3>
+              
+            </div>
         </div>
 
       </div>
