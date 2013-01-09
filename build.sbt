@@ -4,7 +4,7 @@ name := "confluence4s"
 
 organization := "net.mtgto"
 
-version := "0.5.0"
+version := "0.6.0-SNAPSHOT"
 
 scalaVersion := "2.10.0"
 
