@@ -25,7 +25,7 @@ class ClientImpl(
       }.toSeq
     } catch {
       case e: XmlRpcException => throw new ConfluenceException(e)
-      case e => throw e
+      case e: Throwable => throw e
     }
   }
 
@@ -44,7 +44,7 @@ class ClientImpl(
       convertMapToSpace(space)
     } catch {
       case e: XmlRpcException => throw new ConfluenceException(e)
-      case e => throw e
+      case e: Throwable => throw e
     }
   }
 
@@ -64,7 +64,7 @@ class ClientImpl(
       }
     } catch {
       case e: XmlRpcException => throw new ConfluenceException(e)
-      case e => throw e
+      case e: Throwable => throw e
     }
   }
 
@@ -113,7 +113,7 @@ class ClientImpl(
       convertMapToPage(map)
     } catch {
       case e: XmlRpcException => throw new ConfluenceException(e)
-      case e => throw e
+      case e: Throwable => throw e
     }
   }
 
@@ -123,7 +123,7 @@ class ClientImpl(
       convertMapToPage(map)
     } catch {
       case e: XmlRpcException => throw new ConfluenceException(e)
-      case e => throw e
+      case e: Throwable => throw e
     }
   }
 
@@ -138,7 +138,7 @@ class ClientImpl(
       convertMapToPage(page)
     } catch {
       case e: XmlRpcException => throw new ConfluenceException(e)
-      case e => throw e
+      case e: Throwable => throw e
     }
   }
 
@@ -147,7 +147,7 @@ class ClientImpl(
       innerClient.execute("confluence2.movePage", Array[AnyRef](token, pageId, parentId, position.toString))
     } catch {
       case e: XmlRpcException => throw new ConfluenceException(e)
-      case e => throw e
+      case e: Throwable => throw e
     }
   }
 
@@ -173,7 +173,7 @@ class ClientImpl(
       )
     } catch {
       case e: XmlRpcException => throw new ConfluenceException(e)
-      case e => throw e
+      case e: Throwable => throw e
     }
   }
 
@@ -183,7 +183,7 @@ class ClientImpl(
       convertMapToComment(map)
     } catch {
       case e: XmlRpcException => throw new ConfluenceException(e)
-      case e => throw e
+      case e: Throwable => throw e
     }
   }
 
@@ -196,7 +196,7 @@ class ClientImpl(
       convertMapToComment(comment)
     } catch {
       case e: XmlRpcException => throw new ConfluenceException(e)
-      case e => throw e
+      case e: Throwable => throw e
     }
   }
 
@@ -206,7 +206,7 @@ class ClientImpl(
       getBoolean(result)
     } catch {
       case e: XmlRpcException => throw new ConfluenceException(e)
-      case e => throw e
+      case e: Throwable => throw e
     }
   }
 
@@ -235,7 +235,7 @@ class ClientImpl(
       )
     } catch {
       case e: XmlRpcException => throw new ConfluenceException(e)
-      case e => throw e
+      case e: Throwable => throw e
     }
   }
 
@@ -244,7 +244,7 @@ class ClientImpl(
       innerClient.execute("confluence2.getAttachmentData", Array[AnyRef](token, pageId, fileName, "0")).asInstanceOf[Array[Byte]]
     } catch {
       case e: XmlRpcException => throw new ConfluenceException(e)
-      case e => throw e
+      case e: Throwable => throw e
     }
   }
 }

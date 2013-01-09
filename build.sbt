@@ -4,11 +4,11 @@ name := "confluence4s"
 
 organization := "net.mtgto"
 
-version := "0.4.0"
+version := "0.5.0"
 
-scalaVersion := "2.9.2"
+scalaVersion := "2.10.0"
 
-crossScalaVersions := Seq("2.9.1", "2.9.2")
+crossScalaVersions := Seq("2.9.1", "2.9.2", "2.10.0")
 
 scalacOptions ++= Seq("-deprecation", "-unchecked", "-encoding", "UTF8")
 

@@ -2,7 +2,7 @@ confluence4s
 ========
 confluence4s is a library to easily access to Atlassian Confluence XML-RPC API written by Scala.
 
-Confluence4s supports limited features.
+Current version supports limited features.
 Fow now, confluence4s has following features.
 
 - Spaces
@@ -24,16 +24,19 @@ Fow now, confluence4s has following features.
 
 confluence4s uses [Apache XML-RPC](http://ws.apache.org/xmlrpc/index.html).
 
+# API documentation
+See [scaladoc](http://mtgto.github.com/confluence4s/api/index.html).
+
 # How to use
 First, you add maven repository of confuence4s to your configuration.
 Next, you add confluence4s to library dependencies.
 
-If you use sbt, you write like below:
+If you are using sbt, you write like below:
 
 ```
 resolvers += "confluence4s repos" at "http://mtgto.github.com/confluence4s/maven/"
 
-libraryDependencies += "net.mtgto" %% "confluence4s" % "0.4.0"
+libraryDependencies += "net.mtgto" %% "confluence4s" % "0.5.0"
 ```
 
 Now, you write the program to access confluence.
