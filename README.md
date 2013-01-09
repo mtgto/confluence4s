@@ -36,7 +36,7 @@ If you are using sbt, you write like below:
 ```
 resolvers += "confluence4s repos" at "http://mtgto.github.com/confluence4s/maven/"
 
-libraryDependencies += "net.mtgto" %% "confluence4s" % "0.4.0"
+libraryDependencies += "net.mtgto" %% "confluence4s" % "0.5.0"
 ```
 
 Now, you write the program to access confluence.
